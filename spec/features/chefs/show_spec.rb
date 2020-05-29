@@ -17,6 +17,12 @@ RSpec.describe "chefs show page" do
       @dish_ingredients3 = DishIngredient.create(dish: @dish2, ingredient: @ingredient3)
       @dish_ingredients4 = DishIngredient.create(dish: @dish2, ingredient: @ingredient4)
       @dish_ingredients6 = DishIngredient.create(dish: @dish2, ingredient: @ingredient5)
+
+      @dish3 = @chef1.dishes.create(name: "Steak Diane", description: "Tasty")
+      @dish_ingredients7 = DishIngredient.create(dish: @dish3, ingredient: @ingredient1)
+      @dish_ingredients8 = DishIngredient.create(dish: @dish3, ingredient: @ingredient5)
+      @dish_ingredients8 = DishIngredient.create(dish: @dish3, ingredient: @ingredient3)
+      
     end
 
     it "can see list of ingredients and name of chef" do
@@ -36,12 +42,27 @@ RSpec.describe "chefs show page" do
       expect(page).to have_content(@ingredient5.name)
 
     end
+
+    it "can see three most popular ingredients" do
+      
+      visit "/chefs/#{@chef1.id}"
+
+      within ".popular" do
+        expect(page).to have_content(@ingredient1.name) 
+        expect(page).to have_content(@ingredient3.name) 
+        expect(page).to have_content(@ingredient5.name) 
+      end
+    end
+    
   end
 end
-
-# tory 3 of 3
 # As a visitor
 # When I visit a chef's show page
+# I see the three most popular ingredients that the chef uses in their dishes
+# (Popularity is based off of how many dishes use that ingredient)
+# # tory 3 of 3
+# # As a visitor
+# # When I visit a chef's show page
 # I see the name of that chef
 # And I see a link to view a list of all ingredients that this chef uses in their dishes
 # When I click on that link
