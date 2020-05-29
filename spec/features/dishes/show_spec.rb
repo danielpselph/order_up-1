@@ -7,8 +7,8 @@ RSpec.describe "dishes show page" do
       @dish1 = @chef1.dishes.create(name: "Beef Wellington", description: "Excellent")
       @ingredient1 = Ingredient.create(name: "Beef", calories: 100)
       @ingredient2 = Ingredient.create(name: "Dough", calories: 50)
-      @dish_ingredients1 = (dish: @dish1, ingredient: @ingredient1)
-      @dish_ingredients2 = (dish: @dish1, ingredient: @ingredient2)
+      @dish_ingredients1 = DishIngredient.create(dish: @dish1, ingredient: @ingredient1)
+      @dish_ingredients2 = DishIngredient.create(dish: @dish1, ingredient: @ingredient2)
     end
 
     it "can see list of ingredients and name of chef" do
